@@ -27,17 +27,17 @@
                     var dkx = new Dkx();
 
                     dkx.Offset = br.ReadInt32();
-                    dkx.Unknown1 = br.ReadByte();
+                    dkx.Type = br.ReadByte();
                     dkx.Length = br.ReadInt32();
-                    if (dkx.Unknown1 == 24)
+                    if (dkx.Type == 24)
                     {
                         dkx.Unknown2 = br.ReadBytes(16);
                     }
-                    else if (dkx.Unknown1 == 0)
+                    else if (dkx.Type == 0)
                     {
                         dkx.Unknown2 = br.ReadBytes(19);
                     }
-                    else if (dkx.Unknown1 == 1)
+                    else if (dkx.Type == 1)
                     {
                         dkx.Unknown2 = br.ReadBytes(17);
                     }
@@ -64,7 +64,7 @@
     public class Dkx
     {
         public int Offset { get; set; }
-        public byte Unknown1 { get; set; }
+        public byte Type { get; set; }
         public int Length { get; set; }
         public byte[] Unknown2 { get; set; }
         public Int16 FilenameLength { get; set; }
