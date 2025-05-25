@@ -30,3 +30,7 @@ BOATS_5_38
 BUT_PATROL_WS0
 
 ![BUT_PATROL_WS0](resources/BUT_PATROL_WS0.png)
+
+## Licencing
+
+iiAirplaneDwarf is licensed under the MIT license.
