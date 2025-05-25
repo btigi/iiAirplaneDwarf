@@ -39,6 +39,8 @@
                     }
                     else if (dkx.Type == 1)
                     {
+                        // bytes 4 and 5 are the width
+                        // bytes 6 and 7 are the height
                         dkx.Unknown2 = br.ReadBytes(17);
                     }
                     else
@@ -46,14 +48,20 @@
                         dkx.Unknown2 = br.ReadBytes(17);
                     }
                     dkx.FilenameLength = br.ReadInt16();
-                    dkx.Filename = System.Text.Encoding.UTF8.GetString(br.ReadBytes(dkx.FilenameLength));
+                    if (dkx.FilenameLength > 0 && dkx.FilenameLength < 100)
+                    {
+                        dkx.Filename = System.Text.Encoding.UTF8.GetString(br.ReadBytes(dkx.FilenameLength));
+                    }
                     dkx.Unknown3 = br.ReadInt32();
 
-                    result.Add(dkx);
+                    if (dkx.Filename != null)
+                    {
+                        result.Add(dkx);
+                    }
                     i++;
                 }
             }
-            catch
+            catch (Exception ex)
             {
 
             }
