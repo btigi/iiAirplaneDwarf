@@ -9,7 +9,7 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | ANY     | ✗   |   ✗   | 
 | AOBJ    | ✗   |   ✗   | 
 | BIN     | ✗   |   ✗   | 
-| BMP     | ✗   |   ✗   | 
+| BMP     | ✗   |   ✗   | Standard bitmap
 | DAR     | ✗   |   ✗   | 
 | DKD     | ✔   |   ✗   | Archive data
 | DKX     | ✔   |   ✗   | Archive index
@@ -19,12 +19,12 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | PIC     | ✗   |   ✗   | 
 | RSPR    | ✗   |   ✗   | 
 | SAR     | ✗   |   ✗   | 
-| SPR     | ✗   |   ✗   | 
+| SPR     | ✔   |   ✗   | Sprite animation
 | SSPR    | ✗   |   ✗   | 
 | TMAP    | ✗   |   ✗   | 
 | TMSK    | ✗   |   ✗   | 
 | TSPR    | ✗   |   ✗   | 
-| WAV     | ✗   |   ✗   | 
+| WAV     | ✗   |   ✗   | Standard WAV
 
 ## Usage
 
