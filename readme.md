@@ -16,7 +16,7 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | FNT     | ✗   |   ✗   | 
 | IMT     | ✗   |   ✗   | 
 | MSK     | ✗   |   ✗   | 
-| PIC     | ✗   |   ✗   | 
+| PIC     | ✔   |   ✗   | Terrain textures
 | RSPR    | ✗   |   ✗   | 
 | SAR     | ✗   |   ✗   | 
 | SPR     | ✔   |   ✗   | Sprite animation
@@ -25,6 +25,7 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | TMSK    | ✗   |   ✗   | 
 | TSPR    | ✗   |   ✗   | 
 | WAV     | ✗   |   ✗   | Standard WAV
+
 
 ## Usage
 
@@ -69,6 +70,17 @@ foreach (var archive in archives)
     var types = entries.GroupBy(e => e.TypeName).OrderBy(g => g.Key);
     Console.WriteLine($"  {entries.Count} entries, wrote {written} files -> {dest}");
     Console.WriteLine("  " + string.Join(", ", types.Select(g => $"{g.Key}:{g.Count()}")));
+
+
+    var pic = new PicProcessor();
+    
+    // Tile texture
+    var palette = PicProcessor.LoadPaletteFromBmp(@"PALETTE.bmp");
+    using var tile = pic.Read(File.ReadAllBytes(@"MAPTXTR001.pic"), palette);
+    tile.SaveAsPng("tile.png");
+
+    // Fog overlay (pass DKX width/height; optional plane 0..15)
+    using var fog = pic.Read(dark0Bytes, palette, width: 66, height: 47, plane: 0);
 }
 ```
 
