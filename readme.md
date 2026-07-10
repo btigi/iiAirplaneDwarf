@@ -23,7 +23,7 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | SSPR    | ✗   |   ✗   | 
 | TMAP    | ✗   |   ✗   | 
 | TMSK    | ✗   |   ✗   | 
-| TSPR    | ✗   |   ✗   | 
+| TSPR    | ✔   |   ✗   | Cursor animation table
 | WAV     | ✗   |   ✗   | Standard WAV
 
 
@@ -81,6 +81,16 @@ foreach (var archive in archives)
 
     // Fog overlay (pass DKX width/height; optional plane 0..15)
     using var fog = pic.Read(dark0Bytes, palette, width: 66, height: 47, plane: 0);
+
+    var tspr = new TsprProcessor();
+    var names = tspr.Read(File.ReadAllBytes(@"CUR_CONFIRM.tspr"));
+    var spr = new SprProcessor();
+    var palette = SprProcessor.LoadPaletteFromBmp(@"CURSOR_PAL.bmp");
+    foreach (var name in names)
+    {
+        var frames = spr.Read(File.ReadAllBytes($@"{name}.spr"), palette);
+        // ...
+    }
 }
 ```
 
