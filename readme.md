@@ -1,36 +1,92 @@
-# Introduction
-Experiments in the file formats for the game Submarine Titans.
+iiAirplaneDwarf
+=========
 
-# Archives
-Files are stored in archives files, with each archive file being split into two, an index file (dkx) and a data file (dkd).
-Reading the archive files largely seems to work but does have some issues where we end up at the correct offset but the data we expect is not there, so we read invalid info.
+iiAirplaneDwarf is a C# library supporting the modification of files relating to Submarine Titans, the 2000 RTS game developed by Ellipse Studios.
 
-All extracted files are lacking their header information.
+| Name   | Read | Write | Comment
+|--------|:----:|-------|--------
+| 3DX     | ✗   |   ✗   | 
+| ANY     | ✗   |   ✗   | 
+| AOBJ    | ✗   |   ✗   | 
+| BIN     | ✗   |   ✗   | 
+| BMP     | ✗   |   ✗   | 
+| DAR     | ✗   |   ✗   | 
+| DKD     | ✔   |   ✗   | Archive data
+| DKX     | ✔   |   ✗   | Archive index
+| FNT     | ✗   |   ✗   | 
+| IMT     | ✗   |   ✗   | 
+| MSK     | ✗   |   ✗   | 
+| PIC     | ✗   |   ✗   | 
+| RSPR    | ✗   |   ✗   | 
+| SAR     | ✗   |   ✗   | 
+| SPR     | ✗   |   ✗   | 
+| SSPR    | ✗   |   ✗   | 
+| TMAP    | ✗   |   ✗   | 
+| TMSK    | ✗   |   ✗   | 
+| TSPR    | ✗   |   ✗   | 
+| WAV     | ✗   |   ✗   | 
 
-# Sounds
-Adding a WAV header for signed 16 bit little endian stereo, 11,025hz to the sounds effects creates usable files.
-The same WAV header works for music but has a constant loud hiss and crackle, so we're likely pulling in some unrelated bytes into the sound stream.
+## Usage
 
-# Images
-There are several bitmap images in the archives. Adding a generic bitmap header results in mostly viewable files, though with an incorrect palette.
-Several files require additional manipulation, as a section from the right side of the image is rendered on the left side of the image.
+```csharp
+var processor = new DkxProcessor();
+foreach (var archive in archives)
+{
+    if (!File.Exists(archive))
+    {
+        Console.WriteLine($"skip missing {archive}");
+        continue;
+    }
 
-# Other
-The file formats of the other file types are completely unknown.
+    Console.WriteLine($"Reading {archive}");
 
-FACE1_WS
+    var dkdPath = Path.ChangeExtension(archive, "dkd");
 
-![FACE1_WS](resources/FACE1_WS.png)
+    var entries = processor.Read(archive, dkdPath);
+    var dest = Path.Combine(outRoot, Path.GetFileNameWithoutExtension(archive));
+    Directory.CreateDirectory(dest);
 
+    var written = 0;
+    foreach (var entry in entries)
+    {
+        var payload = entry.Data;
+        if (payload == null || payload.Length == 0)
+        {
+            continue;
+        }
 
-BOATS_5_38
+        var safe = string.Join("_", entry.Filename.Split(Path.GetInvalidFileNameChars()));
+        var path = Path.Combine(dest, $"{safe}.{entry.Extension}");
+        if (File.Exists(path))
+        {
+            path = Path.Combine(dest, $"{safe}_{entry.Type}.{entry.Extension}");
+        }
 
-![BOATS_5_38](resources/BOATS_5_38.png)
+        File.WriteAllBytes(path, payload);
+        written++;
+    }
 
-BUT_PATROL_WS0
+    var types = entries.GroupBy(e => e.TypeName).OrderBy(g => g.Key);
+    Console.WriteLine($"  {entries.Count} entries, wrote {written} files -> {dest}");
+    Console.WriteLine("  " + string.Join(", ", types.Select(g => $"{g.Key}:{g.Count()}")));
+}
+```
 
-![BUT_PATROL_WS0](resources/BUT_PATROL_WS0.png)
+## Compiling
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [.NET](https://dotnet.microsoft.com/) installed on your computer. From your command line:
+
+```
+# Clone this repository
+$ git clone https://github.com/btigi/iiAirplaneDwarf
+
+# Go into the repository
+$ cd src
+
+# Build  the app
+$ dotnet build
+```
 
 ## Licencing
 
-iiAirplaneDwarf is licensed under the MIT license.
+iiAirplaneDwarf is licenced under the MIT License. Full licence details are available in licence.md
