@@ -22,7 +22,7 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | SPR     | ✔   |   ✗   | Sprite animation
 | SSPR    | ✔   |   ✗   | Sprite grouping
 | TMAP    | ✗   |   ✗   | 
-| TMSK    | ✗   |   ✗   | 
+| TMSK    | ✔   |   ✗   | Sprite collision mask
 | TSPR    | ✔   |   ✗   | Cursor animation table
 | WAV     | ✗   |   ✗   | Standard WAV
 
@@ -91,6 +91,14 @@ foreach (var archive in archives)
         var frames = spr.Read(File.ReadAllBytes($@"{name}.spr"), palette);
         // ...
     }
+
+    var tmsk = new TmskProcessor();
+    // Width/height from DKX (defaults 32×32)
+    var masks = tmsk.Read(@"aven.tmsk");
+    masks[0].SaveAsPng("aven_mask0.png");
+    
+    // Full-resolution mask (e.g. trmmine)
+    var full = tmsk.Read(@"trmmine.tmsk", width: 180, height: 140);
 }
 ```
 
