@@ -17,10 +17,10 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | IMT     | ✗   |   ✗   | 
 | MSK     | ✗   |   ✗   | 
 | PIC     | ✔   |   ✗   | Terrain textures
-| RSPR    | ✗   |   ✗   | 
+| RSPR    | ✔   |   ✗   | Sprite animation grouping
 | SAR     | ✗   |   ✗   | 
 | SPR     | ✔   |   ✗   | Sprite animation
-| SSPR    | ✔   |   ✗   | Sprite animation grouping
+| SSPR    | ✔   |   ✗   | Sprite grouping
 | TMAP    | ✗   |   ✗   | 
 | TMSK    | ✗   |   ✗   | 
 | TSPR    | ✔   |   ✗   | Cursor animation table
