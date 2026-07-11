@@ -14,15 +14,15 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | DKD     | ✔   |   ✗   | Archive data
 | DKX     | ✔   |   ✗   | Archive index
 | FNT     | ✗   |   ✗   | 
-| IMT     | ✗   |   ✗   | 
-| MSK     | ✗   |   ✗   | 
+| IMT     | ✔   |   ✗   | UI grouping
+| MSK     | ✔   |   ✗   | UI masks |
 | PIC     | ✔   |   ✗   | Terrain textures
 | RSPR    | ✔   |   ✗   | Sprite animation grouping
 | SAR     | ✗   |   ✗   | 
 | SPR     | ✔   |   ✗   | Sprite animation
 | SSPR    | ✔   |   ✗   | Sprite grouping
 | TMAP    | ✗   |   ✗   | 
-| TMSK    | ✔   |   ✗   | Sprite collision mask
+| TMSK    | ✔   |   ✗   | Sprite mask
 | TSPR    | ✔   |   ✗   | Cursor animation table
 | WAV     | ✗   |   ✗   | Standard WAV
 
