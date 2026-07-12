@@ -15,17 +15,16 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | DKX     | ✔   |   ✗   | Archive index
 | FNT     | ✗   |   ✗   | 
 | IMT     | ✔   |   ✗   | UI grouping
-| MSK     | ✔   |   ✗   | UI masks |
+| MSK     | ✔   |   ✗   | UI mask
 | PIC     | ✔   |   ✗   | Terrain textures
 | RSPR    | ✔   |   ✗   | Sprite animation grouping
-| SAR     | ✗   |   ✗   | 
+| SAR     | ✔   |   ✗   | String table
 | SPR     | ✔   |   ✗   | Sprite animation
 | SSPR    | ✔   |   ✗   | Sprite grouping
 | TMAP    | ✗   |   ✗   | 
 | TMSK    | ✔   |   ✗   | Sprite mask
 | TSPR    | ✔   |   ✗   | Cursor animation table
 | WAV     | ✗   |   ✗   | Standard WAV
-
 
 ## Usage
 
@@ -99,6 +98,14 @@ foreach (var archive in archives)
     
     // Full-resolution mask (e.g. trmmine)
     var full = tmsk.Read(@"trmmine.tmsk", width: 180, height: 140);
+
+
+    var sar = new SarProcessor();
+    var table = sar.Read(@"SND_201.sar");
+    foreach (var entry in table.Entries)
+    {
+        Console.WriteLine($"{entry.Index}: {entry.Value}");
+    }        
 }
 ```
 
