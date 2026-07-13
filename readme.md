@@ -11,20 +11,24 @@ iiAirplaneDwarf is a C# library supporting the modification of files relating to
 | BIN     | ✗   |   ✗   | 
 | BMP     | ✗   |   ✗   | Standard bitmap
 | DAR     | ✗   |   ✗   | 
+| DFN     | ✗   |   ✗   | Plain text (AI script defines)
 | DKD     | ✔   |   ✗   | Archive data
 | DKX     | ✔   |   ✗   | Archive index
-| FNT     | ✗   |   ✗   | 
+| FNT     | ✔   |   ✗   | Font metadata
 | IMT     | ✔   |   ✗   | UI grouping
+| MCR     | ✗   |   ✗   | Plain text (AI macro)
 | MSK     | ✔   |   ✗   | UI mask
 | PIC     | ✔   |   ✗   | Terrain textures
 | RSPR    | ✔   |   ✗   | Sprite animation grouping
 | SAR     | ✔   |   ✗   | String table
+| SMF     | ✗   |   ✗   | Plain text
 | SPR     | ✔   |   ✗   | Sprite animation
 | SSPR    | ✔   |   ✗   | Sprite grouping
 | TMAP    | ✗   |   ✗   | 
 | TMSK    | ✔   |   ✗   | Sprite mask
 | TSPR    | ✔   |   ✗   | Cursor animation table
-| WAV     | ✗   |   ✗   | Standard WAV
+| TXT     | ✗   |   ✗   | Plain text (AI macro)
+| WAV     | ✗   |   ✗   | Plain text (tech level definitions)
 
 ## Usage
 
@@ -105,7 +109,12 @@ foreach (var archive in archives)
     foreach (var entry in table.Entries)
     {
         Console.WriteLine($"{entry.Index}: {entry.Value}");
-    }        
+    }
+
+    var fnt = new FntProcessor();
+    var font = fnt.Read(@"SYS_FONT.fnt");
+    var glyph = font.FindGlyph('A');
+    // glyph.Width, glyph.Height, glyph.AtlasOffset
 }
 ```
 
