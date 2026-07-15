@@ -1,13 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-  <ItemGroup>
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
-  </ItemGroup>
+		<RootNamespace>ii.AirplaneDwarf</RootNamespace>
+		<AssemblyName>ii.AirplaneDwarf</AssemblyName>
+		<LangVersion>latest</LangVersion>
+		<Copyright>Copyright © 2026</Copyright>
+		<Title>ii.AirplaneDwarf</Title>
+		<Version>0.3.0</Version>
+		<Authors>iggti</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/btigi/iiAirplaneDwarf</RepositoryUrl>
+		<Description>
+			C# library to facilitate editing files from Submarine Titans by Ellipse Studios.
+		</Description>
+		<PackageTags>solar winds;ellipse studios</PackageTags>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\readme.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 </Project>
